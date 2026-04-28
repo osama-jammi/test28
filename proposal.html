@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Je t'aime mon amour 💍</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8a0a0;
+    --deep-rose: #c4606a;
+    --gold: #d4a847;
+    --cream: #fdf6ef;
+    --dark: #2a1a1a;
+    --petal: #f5ccd4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ---- PETALS BACKGROUND ---- */
+  .petals-bg {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    width: 12px; height: 18px;
+    background: var(--petal);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+    filter: blur(0.5px);
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0.8; }
+    80%  { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(400deg) translateX(60px); opacity: 0; }
+  }
+
+  /* ---- MAIN WRAPPER ---- */
+  .wrapper {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  /* ---- HEARTS RAIN ---- */
+  .hearts-container {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+
+  /* ---- INTRO PANEL ---- */
+  #intro-panel {
+    animation: fadeSlideIn 1.2s ease forwards;
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .letter-card {
+    background: white;
+    border: 1px solid #e8d5c4;
+    border-radius: 4px;
+    padding: 60px 70px;
+    max-width: 620px;
+    box-shadow: 0 8px 60px rgba(196,96,106,0.12), 0 2px 12px rgba(0,0,0,0.06);
+    position: relative;
+  }
+  .letter-card::before {
+    content: '';
+    position: absolute; inset: 8px;
+    border: 1px solid #f0dfd5;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .initial {
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    line-height: 1;
+    color: var(--deep-rose);
+    opacity: 0.12;
+    position: absolute;
+    top: 20px; left: 30px;
+    font-style: italic;
+    user-select: none;
+  }
+
+  .love-declaration {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-style: italic;
+    color: var(--deep-rose);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 28px 0;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose), transparent);
+  }
+  .divider-heart {
+    color: var(--deep-rose);
+    font-size: 18px;
+    animation: heartbeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%     { transform: scale(1.3); }
+    28%     { transform: scale(1); }
+    42%     { transform: scale(1.2); }
+  }
+
+  .poem {
+    font-size: 1.15rem;
+    color: #6b4444;
+    line-height: 2;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .date-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 10px;
+  }
+
+  .btn-next {
+    margin-top: 40px;
+    padding: 14px 48px;
+    background: transparent;
+    border: 1.5px solid var(--deep-rose);
+    color: var(--deep-rose);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+  .btn-next:hover {
+    background: var(--deep-rose);
+    color: white;
+    box-shadow: 0 4px 20px rgba(196,96,106,0.3);
+  }
+
+  /* ---- PROPOSAL PANEL ---- */
+  #proposal-panel {
+    display: none;
+    animation: fadeSlideIn 1s ease forwards;
+  }
+
+  .ring-icon {
+    font-size: 64px;
+    animation: float 3s ease-in-out infinite;
+    margin-bottom: 20px;
+    display: block;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+
+  .proposal-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--dark);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .proposal-sub {
+    font-size: 1.05rem;
+    color: #9a6060;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  /* ---- YES BAR ---- */
+  .yes-bar-wrapper {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 32px;
+  }
+  .yes-bar-label {
+    display: flex; justify-content: space-between;
+    font-size: 0.78rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .yes-bar-track {
+    height: 8px;
+    background: #f0e0e0;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .yes-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--rose), var(--deep-rose));
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(.34,1.56,.64,1);
+  }
+  .yes-bar-asks {
+    font-size: 0.75rem; color: #b07070;
+    text-align: right; margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* ---- BUTTONS ---- */
+  .buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  #btn-oui {
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    border: none;
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 4px 20px rgba(196,96,106,0.35);
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    min-width: 120px;
+  }
+  #btn-oui:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 30px rgba(196,96,106,0.5);
+  }
+
+  #btn-non {
+    background: transparent;
+    border: 1.5px solid #ccc;
+    color: #aaa;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    padding: 12px 28px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s;
+  }
+  #btn-non:hover {
+    border-color: #bbb;
+    color: #999;
+  }
+
+  .ask-counter {
+    margin-top: 18px;
+    font-size: 0.82rem;
+    color: #b07070;
+    font-style: italic;
+    min-height: 22px;
+  }
+
+  /* ---- DATES HISTORY ---- */
+  .dates-history {
+    margin-top: 36px;
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+  }
+  .dates-history h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    border-bottom: 1px solid #f0dfd5;
+    padding-bottom: 6px;
+  }
+  #dates-list {
+    list-style: none;
+  }
+  #dates-list li {
+    font-size: 0.9rem;
+    color: #9a6060;
+    padding: 5px 0;
+    display: flex; justify-content: space-between;
+    border-bottom: 1px dashed #f0dfd5;
+    font-style: italic;
+  }
+  #dates-list li .ask-num {
+    color: var(--deep-rose);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* ---- SUCCESS PANEL ---- */
+  #success-panel {
+    display: none;
+    animation: popIn 0.8s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .success-ring {
+    font-size: 90px;
+    display: block;
+    animation: spin-ring 1s cubic-bezier(.34,1.56,.64,1);
+    margin-bottom: 20px;
+  }
+  @keyframes spin-ring {
+    from { transform: rotate(-180deg) scale(0); }
+    to   { transform: rotate(0deg) scale(1); }
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-style: italic;
+    color: var(--deep-rose);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .success-msg {
+    font-size: 1.2rem;
+    color: #6b4444;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+  .success-date {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid #e8d5b0;
+    padding: 10px 28px;
+    display: inline-block;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .letter-card { padding: 40px 28px; }
+  }
+
+  /* ---- H BADGE ---- */
+  .h-badge {
+    position: absolute;
+    top: -16px; right: 24px;
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    padding: 5px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(196,96,106,0.35);
+    white-space: nowrap;
+  }
+  .h-badge span {
+    font-size: 1rem;
+    margin-left: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Petals -->
+<div class="petals-bg" id="petals"></div>
+<div class="hearts-container" id="hearts"></div>
+
+<div class="wrapper">
+
+  <!-- INTRO -->
+  <div id="intro-panel">
+    <div class="letter-card">
+      <div class="h-badge">Pour H <span>♥</span></div>
+      <span class="initial">H</span>
+      <div class="love-declaration">Je t'aime,<br>mon amour 💕</div>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-heart">♥</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="poem">
+        Depuis le jour où tu es entrée dans ma vie,<br>
+        chaque matin est plus doux,<br>
+        chaque soir plus précieux...<br>
+        Tu es mon soleil et ma douceur.
+      </div>
+      <div class="date-tag" id="today-date"></div>
+      <button class="btn-next" onclick="showProposal()">Continuer &rarr;</button>
+    </div>
+  </div>
+
+  <!-- PROPOSAL -->
+  <div id="proposal-panel">
+    <div class="letter-card" style="padding: 50px 60px;">
+      <div class="h-badge">Pour H <span>♥</span></div>
+      <span class="initial">H</span>
+      <span class="ring-icon">💍</span>
+      <div class="proposal-question">Veux-tu m'épouser ?</div>
+      <div class="proposal-sub" id="proposal-sub">Mon cœur t'attend depuis toujours...</div>
+
+      <!-- YES BAR -->
+      <div class="yes-bar-wrapper">
+        <div class="yes-bar-label">
+          <span>Amour</span>
+          <span id="bar-percent">0%</span>
+        </div>
+        <div class="yes-bar-track">
+          <div class="yes-bar-fill" id="yes-bar"></div>
+        </div>
+        <div class="yes-bar-asks" id="bar-asks"></div>
+      </div>
+
+      <div class="buttons">
+        <button id="btn-oui" onclick="acceptProposal()">Oui, pour toujours ! 💕</button>
+        <button id="btn-non" onclick="refuseProposal()">Pas maintenant...</button>
+      </div>
+
+      <div class="ask-counter" id="ask-counter"></div>
+
+      <!-- DATE HISTORY -->
+      <div class="dates-history" id="dates-history" style="display:none">
+        <h3>Mes demandes pour toi</h3>
+        <ul id="dates-list"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="success-panel">
+    <div class="letter-card" style="padding: 60px 70px;">
+      <div class="h-badge">Pour H <span>♥</span></div>
+      <span class="success-ring">💍</span>
+      <div class="success-title">Oui !!!</div>
+      <div class="success-msg">
+        Tu m'as rendue la plus heureuse<br>
+        du monde à cet instant précis.<br>
+        Je t'aime pour l'éternité, mon amour. 💕
+      </div>
+      <div class="success-date" id="success-date"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ----- HELPERS -----
+  function formatDate(d) {
+    const days   = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+    const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+    return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} — ${String(d.getHours()).padStart(2,'0')}h${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+  function formatShort(d) {
+    const months = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  // Init today
+  const now = new Date();
+  document.getElementById('today-date').textContent = formatDate(now);
+
+  // ----- PETALS -----
+  const petalsBg = document.getElementById('petals');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 8 + Math.random() * 12;
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${size}px; height:${size*1.5}px;
+      animation-duration:${6+Math.random()*8}s;
+      animation-delay:${Math.random()*10}s;
+      opacity:${0.4+Math.random()*0.5};
+      transform: rotate(${Math.random()*360}deg);
+    `;
+    petalsBg.appendChild(p);
+  }
+
+  // ----- STATE -----
+  let askCount = 0;
+  const askDates = [];
+  const subTexts = [
+    "Mon cœur t'attend depuis toujours...",
+    "S'il te plaît, dis-moi oui... 🥺",
+    "Je te le redemande avec encore plus d'amour...",
+    "Tu es tout pour moi, je t'en supplie...",
+    "Chaque refus me donne encore plus envie de te le demander...",
+    "Mon amour pour toi est infini, dis-moi oui !",
+    "Je suis prête à demander encore et encore...",
+    "Rien ne pourra m'arrêter, je t'aime trop !"
+  ];
+
+  // ----- SHOW PROPOSAL -----
+  function showProposal() {
+    document.getElementById('intro-panel').style.display = 'none';
+    const pp = document.getElementById('proposal-panel');
+    pp.style.display = 'block';
+    recordAsk();
+  }
+
+  function recordAsk() {
+    askCount++;
+    const d = new Date();
+    askDates.push(d);
+    updateBar();
+    updateAskUI(d);
+    addDateToList(d);
+    growOuiButton();
+  }
+
+  function updateBar() {
+    const pct = Math.min(100, askCount * 12);
+    document.getElementById('yes-bar').style.width = pct + '%';
+    document.getElementById('bar-percent').textContent = pct + '%';
+    document.getElementById('bar-asks').textContent =
+      askCount === 1 ? '1ère demande' : `${askCount}ème demande`;
+  }
+
+  function updateAskUI(d) {
+    const sub = subTexts[Math.min(askCount - 1, subTexts.length - 1)];
+    document.getElementById('proposal-sub').textContent = sub;
+
+    if (askCount > 1) {
+      document.getElementById('ask-counter').textContent =
+        `💌 Demande n°${askCount} — le ${formatDate(d)}`;
+    }
+  }
+
+  function addDateToList(d) {
+    const hist = document.getElementById('dates-history');
+    if (askCount >= 2) hist.style.display = 'block';
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="ask-num">#${askCount}</span><span>${formatShort(d)}</span>`;
+    document.getElementById('dates-list').prepend(li);
+  }
+
+  function growOuiButton() {
+    const btn = document.getElementById('btn-oui');
+    const scale = 1 + (askCount - 1) * 0.06;
+    btn.style.transform = `scale(${Math.min(scale, 1.5)})`;
+    btn.style.fontSize = `${1.2 + (askCount - 1) * 0.05}rem`;
+    btn.style.padding = `${16 + (askCount-1)*1.5}px ${40 + (askCount-1)*3}px`;
+  }
+
+  // ----- REFUSE -----
+  const refuseMessages = [
+    "Pas maintenant...",
+    "Peut-être plus tard ?",
+    "Je ne suis pas sûre...",
+    "Laisse-moi réfléchir...",
+    "C'est trop tôt ?",
+  ];
+  let refuseIdx = 0;
+
+  function refuseProposal() {
+    refuseIdx = Math.min(refuseIdx + 1, refuseMessages.length - 1);
+    const btn = document.getElementById('btn-non');
+    btn.textContent = refuseMessages[refuseIdx];
+    // Short delay then re-ask
+    setTimeout(() => {
+      recordAsk();
+    }, 1200);
+  }
+
+  // ----- ACCEPT -----
+  function acceptProposal() {
+    document.getElementById('proposal-panel').style.display = 'none';
+    const sp = document.getElementById('success-panel');
+    sp.style.display = 'block';
+    const d = new Date();
+    document.getElementById('success-date').textContent =
+      '💍 ' + formatDate(d);
+    launchHearts();
+  }
+
+  // ----- HEARTS -----
+  function launchHearts() {
+    const container = document.getElementById('hearts');
+    container.innerHTML = '';
+    const emojis = ['💕','💗','💖','💝','💓','♥','💞','💘'];
+    for (let i = 0; i < 40; i++) {
+      const h = document.createElement('div');
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      const size = 20 + Math.random() * 30;
+      h.style.cssText = `
+        position:absolute;
+        left:${Math.random()*100}%;
+        bottom:-60px;
+        font-size:${size}px;
+        animation: rise ${3+Math.random()*4}s ease-out forwards;
+        animation-delay:${Math.random()*3}s;
+        opacity:0;
+      `;
+      container.appendChild(h);
+    }
+    // Add rise keyframe dynamically
+    if (!document.getElementById('rise-style')) {
+      const s = document.createElement('style');
+      s.id = 'rise-style';
+      s.textContent = `
+        @keyframes rise {
+          0%   { transform: translateY(0) scale(0); opacity: 0; }
+          20%  { opacity: 1; }
+          100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(s);
+    }
+  }
+</script>
+</body>
+</html>
