@@ -1,642 +1,153 @@
-<!DOCTYPE html>
-<html lang="fr">
+﻿<!DOCTYPE html>
+<html lang="ar" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Je t'aime mon amour 💍</title>
+<title>3id Milad Sa3id</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --rose: #e8a0a0;
-    --deep-rose: #c4606a;
-    --gold: #d4a847;
-    --cream: #fdf6ef;
-    --dark: #2a1a1a;
-    --petal: #f5ccd4;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--cream);
-    font-family: 'Cormorant Garamond', serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  /* ---- PETALS BACKGROUND ---- */
-  .petals-bg {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 0;
-    overflow: hidden;
-  }
-  .petal {
-    position: absolute;
-    width: 12px; height: 18px;
-    background: var(--petal);
-    border-radius: 50% 0 50% 0;
-    opacity: 0;
-    animation: fall linear infinite;
-    filter: blur(0.5px);
-  }
-  @keyframes fall {
-    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0.8; }
-    80%  { opacity: 0.6; }
-    100% { transform: translateY(110vh) rotate(400deg) translateX(60px); opacity: 0; }
-  }
-
-  /* ---- MAIN WRAPPER ---- */
-  .wrapper {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-    text-align: center;
-  }
-
-  /* ---- HEARTS RAIN ---- */
-  .hearts-container {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 0;
-    overflow: hidden;
-  }
-
-  /* ---- INTRO PANEL ---- */
-  #intro-panel {
-    animation: fadeSlideIn 1.2s ease forwards;
-  }
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .letter-card {
-    background: white;
-    border: 1px solid #e8d5c4;
-    border-radius: 4px;
-    padding: 60px 70px;
-    max-width: 620px;
-    box-shadow: 0 8px 60px rgba(196,96,106,0.12), 0 2px 12px rgba(0,0,0,0.06);
-    position: relative;
-  }
-  .letter-card::before {
-    content: '';
-    position: absolute; inset: 8px;
-    border: 1px solid #f0dfd5;
-    border-radius: 2px;
-    pointer-events: none;
-  }
-
-  .initial {
-    font-family: 'Playfair Display', serif;
-    font-size: 100px;
-    line-height: 1;
-    color: var(--deep-rose);
-    opacity: 0.12;
-    position: absolute;
-    top: 20px; left: 30px;
-    font-style: italic;
-    user-select: none;
-  }
-
-  .love-declaration {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 6vw, 3.8rem);
-    font-style: italic;
-    color: var(--deep-rose);
-    line-height: 1.2;
-    letter-spacing: 0.01em;
-    margin-bottom: 24px;
-    position: relative;
-  }
-
-  .divider {
-    display: flex; align-items: center; gap: 16px;
-    margin: 28px 0;
-  }
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--rose), transparent);
-  }
-  .divider-heart {
-    color: var(--deep-rose);
-    font-size: 18px;
-    animation: heartbeat 1.4s ease-in-out infinite;
-  }
-  @keyframes heartbeat {
-    0%,100% { transform: scale(1); }
-    14%     { transform: scale(1.3); }
-    28%     { transform: scale(1); }
-    42%     { transform: scale(1.2); }
-  }
-
-  .poem {
-    font-size: 1.15rem;
-    color: #6b4444;
-    line-height: 2;
-    font-style: italic;
-    font-weight: 300;
-    margin-bottom: 20px;
-  }
-
-  .date-tag {
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-top: 10px;
-  }
-
-  .btn-next {
-    margin-top: 40px;
-    padding: 14px 48px;
-    background: transparent;
-    border: 1.5px solid var(--deep-rose);
-    color: var(--deep-rose);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-  }
-  .btn-next:hover {
-    background: var(--deep-rose);
-    color: white;
-    box-shadow: 0 4px 20px rgba(196,96,106,0.3);
-  }
-
-  /* ---- PROPOSAL PANEL ---- */
-  #proposal-panel {
-    display: none;
-    animation: fadeSlideIn 1s ease forwards;
-  }
-
-  .ring-icon {
-    font-size: 64px;
-    animation: float 3s ease-in-out infinite;
-    margin-bottom: 20px;
-    display: block;
-  }
-  @keyframes float {
-    0%,100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
-  }
-
-  .proposal-question {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    color: var(--dark);
-    line-height: 1.3;
-    margin-bottom: 12px;
-  }
-  .proposal-sub {
-    font-size: 1.05rem;
-    color: #9a6060;
-    font-style: italic;
-    margin-bottom: 40px;
-  }
-
-  /* ---- YES BAR ---- */
-  .yes-bar-wrapper {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 32px;
-  }
-  .yes-bar-label {
-    display: flex; justify-content: space-between;
-    font-size: 0.78rem; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 6px;
-  }
-  .yes-bar-track {
-    height: 8px;
-    background: #f0e0e0;
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .yes-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--rose), var(--deep-rose));
-    border-radius: 99px;
-    transition: width 0.8s cubic-bezier(.34,1.56,.64,1);
-  }
-  .yes-bar-asks {
-    font-size: 0.75rem; color: #b07070;
-    text-align: right; margin-top: 4px;
-    font-style: italic;
-  }
-
-  /* ---- BUTTONS ---- */
-  .buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-
-  #btn-oui {
-    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
-    border: none;
-    color: white;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
-    box-shadow: 0 4px 20px rgba(196,96,106,0.35);
-    padding: 16px 40px;
-    font-size: 1.2rem;
-    min-width: 120px;
-  }
-  #btn-oui:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 30px rgba(196,96,106,0.5);
-  }
-
-  #btn-non {
-    background: transparent;
-    border: 1.5px solid #ccc;
-    color: #aaa;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    padding: 12px 28px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.3s;
-  }
-  #btn-non:hover {
-    border-color: #bbb;
-    color: #999;
-  }
-
-  .ask-counter {
-    margin-top: 18px;
-    font-size: 0.82rem;
-    color: #b07070;
-    font-style: italic;
-    min-height: 22px;
-  }
-
-  /* ---- DATES HISTORY ---- */
-  .dates-history {
-    margin-top: 36px;
-    max-width: 400px;
-    width: 100%;
-    text-align: left;
-  }
-  .dates-history h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-    border-bottom: 1px solid #f0dfd5;
-    padding-bottom: 6px;
-  }
-  #dates-list {
-    list-style: none;
-  }
-  #dates-list li {
-    font-size: 0.9rem;
-    color: #9a6060;
-    padding: 5px 0;
-    display: flex; justify-content: space-between;
-    border-bottom: 1px dashed #f0dfd5;
-    font-style: italic;
-  }
-  #dates-list li .ask-num {
-    color: var(--deep-rose);
-    font-weight: 600;
-    font-style: normal;
-  }
-
-  /* ---- SUCCESS PANEL ---- */
-  #success-panel {
-    display: none;
-    animation: popIn 0.8s cubic-bezier(.34,1.56,.64,1) forwards;
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.7); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-  .success-ring {
-    font-size: 90px;
-    display: block;
-    animation: spin-ring 1s cubic-bezier(.34,1.56,.64,1);
-    margin-bottom: 20px;
-  }
-  @keyframes spin-ring {
-    from { transform: rotate(-180deg) scale(0); }
-    to   { transform: rotate(0deg) scale(1); }
-  }
-  .success-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-style: italic;
-    color: var(--deep-rose);
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .success-msg {
-    font-size: 1.2rem;
-    color: #6b4444;
-    line-height: 1.8;
-    font-style: italic;
-    margin-bottom: 24px;
-  }
-  .success-date {
-    font-size: 0.85rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid #e8d5b0;
-    padding: 10px 28px;
-    display: inline-block;
-    border-radius: 2px;
-  }
-
-  @media (max-width: 600px) {
-    .letter-card { padding: 40px 28px; }
-  }
-
-  /* ---- H BADGE ---- */
-  .h-badge {
-    position: absolute;
-    top: -16px; right: 24px;
-    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
-    color: white;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.82rem;
-    letter-spacing: 0.18em;
-    padding: 5px 16px;
-    border-radius: 20px;
-    box-shadow: 0 4px 14px rgba(196,96,106,0.35);
-    white-space: nowrap;
-  }
-  .h-badge span {
-    font-size: 1rem;
-    margin-left: 4px;
-  }
+  :root { --gold:#d4a847; --deep:#8b1a1a; --cream:#fdf6ef; --dark:#2a1a1a; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cream); font-family:"Cormorant Garamond",serif; min-height:100vh; overflow-x:hidden; }
+  .confetti-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+  .conf { position:absolute; opacity:0; border-radius:2px; animation:confFall linear infinite; }
+  @keyframes confFall { 0%{transform:translateY(-30px) rotate(0deg);opacity:.9} 100%{transform:translateY(110vh) rotate(720deg);opacity:0} }
+  .star-float { position:fixed; pointer-events:none; z-index:0; animation:starRise linear infinite; opacity:0; }
+  @keyframes starRise { 0%{opacity:0;transform:translateY(0)} 10%{opacity:.7} 90%{opacity:.4} 100%{opacity:0;transform:translateY(-100vh) rotate(360deg)} }
+  .wrapper { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:40px 20px; text-align:center; }
+  .card { background:white; border:1px solid #e8d5c4; border-radius:4px; padding:60px 70px; max-width:640px; width:100%; box-shadow:0 8px 60px rgba(212,168,71,.18),0 2px 12px rgba(0,0,0,.06); position:relative; animation:fadeIn 1.2s ease forwards; }
+  .inner-border { position:absolute; inset:8px; border:1px solid #f0dfd5; border-radius:2px; pointer-events:none; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+  .badge { position:absolute; top:-16px; right:24px; background:linear-gradient(135deg,var(--gold),var(--deep)); color:white; font-family:"Playfair Display",serif; font-style:italic; font-size:.82rem; letter-spacing:.18em; padding:5px 16px; border-radius:20px; box-shadow:0 4px 14px rgba(212,168,71,.4); white-space:nowrap; }
+  .bg-letter { font-family:"Playfair Display",serif; font-size:110px; line-height:1; color:var(--gold); opacity:.07; position:absolute; top:16px; left:26px; font-style:italic; user-select:none; }
+  .main-title { font-family:"Playfair Display",serif; font-size:clamp(2rem,5vw,3.2rem); font-style:italic; color:var(--deep); line-height:1.2; margin-bottom:6px; }
+  .subtitle { font-size:1rem; color:var(--gold); letter-spacing:.15em; text-transform:uppercase; margin-bottom:28px; }
+  .divider { display:flex; align-items:center; gap:14px; margin:24px 0; }
+  .divider-line { flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+  .divider-star { color:var(--gold); font-size:18px; animation:spin 4s linear infinite; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  .poem { font-size:1.12rem; color:#6b4444; line-height:2.1; font-style:italic; font-weight:300; margin-bottom:16px; }
+  .darija { direction:rtl; font-size:1.2rem; color:#5a3a1a; font-style:italic; margin:10px 0; }
+  .date-tag { font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-top:10px; }
+  .btn { margin-top:36px; padding:14px 48px; background:transparent; border:1.5px solid var(--deep); color:var(--deep); font-family:"Cormorant Garamond",serif; font-size:1rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:all .3s; border-radius:2px; }
+  .btn:hover { background:var(--deep); color:white; box-shadow:0 4px 20px rgba(139,26,26,.3); }
+  .msg-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:24px 0; }
+  .msg-box { background:linear-gradient(135deg,#fff8f0,#fff0e8); border:1px solid #e8d5c4; border-radius:6px; padding:16px 14px; font-size:.95rem; color:#6b4444; font-style:italic; line-height:1.7; text-align:center; transition:transform .25s,box-shadow .25s; cursor:default; }
+  .msg-box:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(212,168,71,.2); }
+  .ico { font-size:1.5rem; display:block; margin-bottom:6px; font-style:normal; }
+  .dj { direction:rtl; font-size:.9rem; color:#5a3a1a; margin-top:4px; }
+  .gift-icon { font-size:80px; display:block; animation:bounce 1.5s ease-in-out infinite; margin-bottom:16px; }
+  @keyframes bounce { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-16px) rotate(3deg)} }
+  .gift-amount { font-family:"Playfair Display",serif; font-size:clamp(3rem,10vw,6rem); font-style:italic; background:linear-gradient(135deg,var(--gold),var(--deep)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin:10px 0; animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+  .gift-label { font-size:1rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:22px 0; text-align:left; }
+  .opt { border:1px solid #e8d5c4; border-radius:6px; padding:14px 16px; background:#fff8f0; transition:all .3s; cursor:pointer; }
+  .opt:hover,.opt.sel { border-color:var(--gold); background:linear-gradient(135deg,#fff8e8,#fff0d0); box-shadow:0 4px 16px rgba(212,168,71,.25); }
+  .oe { font-size:1.4rem; display:block; margin-bottom:4px; }
+  .on { font-family:"Playfair Display",serif; font-size:.95rem; color:var(--dark); }
+  .odj { direction:rtl; font-size:.82rem; color:#9a6060; font-style:italic; margin-top:2px; }
+  .success-title { font-family:"Playfair Display",serif; font-size:clamp(2.2rem,7vw,4.2rem); font-style:italic; color:var(--deep); line-height:1.1; margin-bottom:14px; }
+  @media(max-width:600px){ .card{padding:36px 22px} .msg-grid,.opts{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
-
-<!-- Petals -->
-<div class="petals-bg" id="petals"></div>
-<div class="hearts-container" id="hearts"></div>
-
+<div class="confetti-bg" id="conf-bg"></div>
 <div class="wrapper">
-
-  <!-- INTRO -->
-  <div id="intro-panel">
-    <div class="letter-card">
-      <div class="h-badge">Pour H <span>♥</span></div>
-      <span class="initial">H</span>
-      <div class="love-declaration">Je t'aime,<br>mon amour 💕</div>
-      <div class="divider">
-        <div class="divider-line"></div>
-        <div class="divider-heart">♥</div>
-        <div class="divider-line"></div>
-      </div>
+  <div id="p1">
+    <div class="card">
+      <div class="inner-border"></div>
+      <div class="badge">3id Milad Sa3id</div>
+      <span class="bg-letter">H</span>
+      <div style="font-size:58px;margin-bottom:14px">&#x1F382;&#x2728;</div>
+      <div class="main-title">3id Milad Sa3id,<br>7ayati !</div>
+      <div class="subtitle">Joyeux Anniversaire</div>
+      <div class="divider"><div class="divider-line"></div><div class="divider-star">&#x2605;</div><div class="divider-line"></div></div>
       <div class="poem">
-        Depuis le jour où tu es entrée dans ma vie,<br>
-        chaque matin est plus doux,<br>
-        chaque soir plus précieux...<br>
-        Tu es mon soleil et ma douceur.
+        Hadchi machi mjarrad kalimat,<br>
+        Hiya 7issasi, Hiya rohi, Hiya nta.<br>
+        <span class="darija">&#x647;&#x627;&#x62F; &#x627;&#x644;&#x646;&#x647;&#x627;&#x631; &#x647;&#x648; &#x646;&#x647;&#x627;&#x631;&#x643;&#x60C; &#x64A;&#x627; &#x62D;&#x64A;&#x627;&#x62A;&#x64A;</span>
       </div>
       <div class="date-tag" id="today-date"></div>
-      <button class="btn-next" onclick="showProposal()">Continuer &rarr;</button>
+      <button class="btn" onclick="go('p1','p2')">Chwiya d'amour &#x2192;</button>
     </div>
   </div>
-
-  <!-- PROPOSAL -->
-  <div id="proposal-panel">
-    <div class="letter-card" style="padding: 50px 60px;">
-      <div class="h-badge">Pour H <span>♥</span></div>
-      <span class="initial">H</span>
-      <span class="ring-icon">💍</span>
-      <div class="proposal-question">Veux-tu m'épouser ?</div>
-      <div class="proposal-sub" id="proposal-sub">Mon cœur t'attend depuis toujours...</div>
-
-      <!-- YES BAR -->
-      <div class="yes-bar-wrapper">
-        <div class="yes-bar-label">
-          <span>Amour</span>
-          <span id="bar-percent">0%</span>
-        </div>
-        <div class="yes-bar-track">
-          <div class="yes-bar-fill" id="yes-bar"></div>
-        </div>
-        <div class="yes-bar-asks" id="bar-asks"></div>
+  <div id="p2" style="display:none">
+    <div class="card" style="animation:fadeIn 1s ease forwards">
+      <div class="inner-border"></div>
+      <div class="badge">Rasayli lik</div>
+      <span class="bg-letter">H</span>
+      <div class="main-title" style="margin-bottom:8px">Min galbi lik</div>
+      <div class="subtitle">&#x645;&#x646; &#x642;&#x644;&#x628;&#x64A; &#x644;&#x64A;&#x643;</div>
+      <div class="divider"><div class="divider-line"></div><div class="divider-star">&#x2665;</div><div class="divider-line"></div></div>
+      <div class="msg-grid">
+        <div class="msg-box"><span class="ico">&#x1F31F;</span>Nta zwina f kol shi, fi dak bsemtek w f 7sn galbook.<div class="dj">&#x646;&#x62A;&#x627; &#x632;&#x648;&#x64A;&#x646; &#x641;&#x64A; &#x643;&#x644; &#x634;&#x64A; &#x2014; &#x641;&#x64A; &#x628;&#x633;&#x645;&#x62A;&#x643; &#x648;&#x641;&#x64A; &#x62D;&#x633;&#x646; &#x642;&#x644;&#x628;&#x643;</div></div>
+        <div class="msg-box"><span class="ico">&#x1F319;</span>Kol 3am w nta b5ir, wa 7yatk tkoun a7la w a7la.<div class="dj">&#x643;&#x644; &#x639;&#x627;&#x645; &#x648;&#x627;&#x646;&#x62A; &#x628;&#x62E;&#x64A;&#x631; &#x2014; &#x648;&#x62D;&#x64A;&#x627;&#x62A;&#x643; &#x62A;&#x643;&#x648;&#x646; &#x623;&#x62D;&#x644;&#x649; &#x648;&#x623;&#x62D;&#x644;&#x649;</div></div>
+        <div class="msg-box"><span class="ico">&#x1F525;</span>Nta wldt bach tsali donia, w hakouda darty, bli chak.<div class="dj">&#x646;&#x62A;&#x627; &#x648;&#x644;&#x62F;&#x62A; &#x628;&#x627;&#x634; &#x62A;&#x633;&#x627;&#x644;&#x64A; &#x627;&#x644;&#x62F;&#x646;&#x64A;&#x627; &#x2014; &#x648;&#x647;&#x627;&#x643;&#x648;&#x62F;&#x627; &#x62F;&#x627;&#x631;&#x62A;&#x64A;</div></div>
+        <div class="msg-box"><span class="ico">&#x1F49B;</span>Kanbghik b7al sh-shams, w chi li ydiru bidounha.<div class="dj">&#x643;&#x646;&#x628;&#x63A;&#x64A;&#x643; &#x628;&#x62D;&#x627;&#x644; &#x627;&#x644;&#x634;&#x645;&#x633; &#x2014; &#x648;&#x627;&#x644;&#x644;&#x64A; &#x63A;&#x627;&#x62F;&#x64A; &#x64A;&#x62F;&#x64A;&#x631; &#x628;&#x62F;&#x648;&#x646;&#x647;&#x627;</div></div>
+        <div class="msg-box"><span class="ico">&#x1F381;</span>3andak surprise kbira tzid, men galbi liha, ma3a kol 7ob.<div class="dj">&#x639;&#x646;&#x62F;&#x643; &#x633;&#x631;&#x628;&#x631;&#x64A;&#x632; &#x643;&#x628;&#x64A;&#x631;&#x629; &#x2014; &#x645;&#x646; &#x642;&#x644;&#x628;&#x64A; &#x644;&#x64A;&#x647;&#x627;</div></div>
+        <div class="msg-box"><span class="ico">&#x2728;</span>3id miladek yb9a fi 9albi b7al njem f-lil, dima mw9id.<div class="dj">&#x639;&#x64A;&#x62F; &#x645;&#x64A;&#x644;&#x627;&#x62F;&#x643; &#x64A;&#x628;&#x642;&#x649; &#x641;&#x64A; &#x642;&#x644;&#x628;&#x64A; &#x2014; &#x628;&#x62D;&#x627;&#x644; &#x646;&#x62C;&#x645; &#x641;&#x64A; &#x627;&#x644;&#x644;&#x64A;&#x644;</div></div>
       </div>
-
-      <div class="buttons">
-        <button id="btn-oui" onclick="acceptProposal()">Oui, pour toujours ! 💕</button>
-        <button id="btn-non" onclick="refuseProposal()">Pas maintenant...</button>
-      </div>
-
-      <div class="ask-counter" id="ask-counter"></div>
-
-      <!-- DATE HISTORY -->
-      <div class="dates-history" id="dates-history" style="display:none">
-        <h3>Mes demandes pour toi</h3>
-        <ul id="dates-list"></ul>
-      </div>
+      <button class="btn" onclick="go('p2','p3')">Shof cadeau dyalek &#x1F381;</button>
     </div>
   </div>
-
-  <!-- SUCCESS -->
-  <div id="success-panel">
-    <div class="letter-card" style="padding: 60px 70px;">
-      <div class="h-badge">Pour H <span>♥</span></div>
-      <span class="success-ring">💍</span>
-      <div class="success-title">Oui !!!</div>
-      <div class="success-msg">
-        Tu m'as rendue la plus heureuse<br>
-        du monde à cet instant précis.<br>
-        Je t'aime pour l'éternité, mon amour. 💕
+  <div id="p3" style="display:none">
+    <div class="card" style="padding:50px 60px;animation:fadeIn 1s ease forwards">
+      <div class="inner-border"></div>
+      <div class="badge">Cadeau Kbir</div>
+      <span class="bg-letter">H</span>
+      <span class="gift-icon">&#x1F381;</span>
+      <div class="gift-label">Had cadeau lik, 7ayati</div>
+      <div class="gift-amount">$1,000</div>
+      <div class="gift-label" style="font-size:.85rem;margin-top:4px">Alf dollar — l-hak w zid</div>
+      <div class="divider"><div class="divider-line"></div><div class="divider-star">&#x2605;</div><div class="divider-line"></div></div>
+      <p class="poem" style="margin-bottom:12px">Khtar fin bgha 9albek — hadi drouk dyalek.</p>
+      <p class="darija" style="margin-bottom:22px;font-size:1.1rem">&#x627;&#x62E;&#x62A;&#x627;&#x631; &#x641;&#x64A;&#x646; &#x628;&#x63A;&#x649; &#x642;&#x644;&#x628;&#x643; &#x2014; &#x647;&#x627;&#x62F;&#x64A; &#x627;&#x644;&#x62F;&#x631;&#x648;&#x643; &#x62F;&#x64A;&#x627;&#x644;&#x643;</p>
+      <div class="opts">
+        <div class="opt" onclick="selOpt(this)"><span class="oe">&#x2708;&#xFE0F;</span><div class="on">Voyage &amp; Aventure</div><div class="odj">&#x633;&#x641;&#x631; &#x648;&#x639;&#x64A;&#x634; &#x644;&#x62D;&#x638;&#x627;&#x62A; &#x644;&#x627; &#x62A;&#x646;&#x633;&#x649;</div></div>
+        <div class="opt" onclick="selOpt(this)"><span class="oe">&#x1F457;</span><div class="on">Fashion &amp; Style</div><div class="odj">&#x62A;&#x633;&#x648;&#x642; &#x648;&#x62A;&#x62C;&#x62F;&#x62F; &#x644;&#x648;&#x643; &#x62F;&#x64A;&#x627;&#x644;&#x643;</div></div>
+        <div class="opt" onclick="selOpt(this)"><span class="oe">&#x1F486;</span><div class="on">Spa &amp; Bien-être</div><div class="odj">&#x627;&#x633;&#x62A;&#x631;&#x62E;&#x64A; &#x648;&#x627;&#x633;&#x62A;&#x645;&#x62A;&#x639; &#x628;&#x648;&#x642;&#x62A;&#x643;</div></div>
+        <div class="opt" onclick="selOpt(this)"><span class="oe">&#x1F49B;</span><div class="on">Kol shay bgha</div><div class="odj">&#x627;&#x646;&#x62A; &#x627;&#x644;&#x644;&#x64A; &#x62A;&#x62E;&#x62A;&#x627;&#x631; &#x2014; &#x641;&#x64A;&#x646; &#x645;&#x627; &#x628;&#x63A;&#x64A;&#x62A;&#x64A;</div></div>
       </div>
-      <div class="success-date" id="success-date"></div>
+      <p style="font-size:.95rem;color:#9a6060;font-style:italic;line-height:1.8">Hadchi machi mjarrad flous,<br>howa 7obbi w tqdiri liha.</p>
+      <button class="btn" id="confirm-btn" style="display:none" onclick="go('p3','p4');launchFireworks()">Qbalt ! &#x1F389;</button>
     </div>
   </div>
-
+  <div id="p4" style="display:none">
+    <div class="card" style="padding:60px 70px;animation:fadeIn 1s ease forwards">
+      <div class="inner-border"></div>
+      <div class="badge">3id Milad Sa3id</div>
+      <div style="font-size:3rem;margin-bottom:8px">&#x1F389;</div>
+      <div style="font-size:60px;display:block;margin-bottom:14px;animation:bounce 1.5s ease-in-out infinite">&#x1F382;</div>
+      <div class="success-title">3id Milad Sa3id<br>ya 7ayati !</div>
+      <div class="divider"><div class="divider-line"></div><div class="divider-star">&#x2728;</div><div class="divider-line"></div></div>
+      <div class="poem">
+        Kol 3am w nta b5ir w sa3id,<br>
+        m7atat f 9albi bach ma tensach.<br>
+        Nhibbek kter mn kol shi f had donia.<br><br>
+        <span class="darija">&#x643;&#x644; &#x639;&#x627;&#x645; &#x648;&#x627;&#x646;&#x62A; &#x628;&#x62E;&#x64A;&#x631; &#x64A;&#x627; &#x62D;&#x64A;&#x627;&#x62A;&#x64A;</span>
+      </div>
+      <div id="success-date" style="margin-top:28px;font-size:.85rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;border:1px solid #e8d5b0;padding:10px 28px;display:inline-block;border-radius:2px"></div>
+      <div style="margin-top:24px;font-size:2rem;letter-spacing:8px">&#x1F381; &#x1F49B; &#x1F31F;</div>
+    </div>
+  </div>
 </div>
-
 <script>
-  // ----- HELPERS -----
-  function formatDate(d) {
-    const days   = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-    const months = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-    return `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} — ${String(d.getHours()).padStart(2,'0')}h${String(d.getMinutes()).padStart(2,'0')}`;
-  }
-  function formatShort(d) {
-    const months = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-  }
-
-  // Init today
-  const now = new Date();
-  document.getElementById('today-date').textContent = formatDate(now);
-
-  // ----- PETALS -----
-  const petalsBg = document.getElementById('petals');
-  for (let i = 0; i < 22; i++) {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    const size = 8 + Math.random() * 12;
-    p.style.cssText = `
-      left:${Math.random()*100}%;
-      width:${size}px; height:${size*1.5}px;
-      animation-duration:${6+Math.random()*8}s;
-      animation-delay:${Math.random()*10}s;
-      opacity:${0.4+Math.random()*0.5};
-      transform: rotate(${Math.random()*360}deg);
-    `;
-    petalsBg.appendChild(p);
-  }
-
-  // ----- STATE -----
-  let askCount = 0;
-  const askDates = [];
-  const subTexts = [
-    "Mon cœur t'attend depuis toujours...",
-    "S'il te plaît, dis-moi oui... 🥺",
-    "Je te le redemande avec encore plus d'amour...",
-    "Tu es tout pour moi, je t'en supplie...",
-    "Chaque refus me donne encore plus envie de te le demander...",
-    "Mon amour pour toi est infini, dis-moi oui !",
-    "Je suis prête à demander encore et encore...",
-    "Rien ne pourra m'arrêter, je t'aime trop !"
-  ];
-
-  // ----- SHOW PROPOSAL -----
-  function showProposal() {
-    document.getElementById('intro-panel').style.display = 'none';
-    const pp = document.getElementById('proposal-panel');
-    pp.style.display = 'block';
-    recordAsk();
-  }
-
-  function recordAsk() {
-    askCount++;
-    const d = new Date();
-    askDates.push(d);
-    updateBar();
-    updateAskUI(d);
-    addDateToList(d);
-    growOuiButton();
-  }
-
-  function updateBar() {
-    const pct = Math.min(100, askCount * 12);
-    document.getElementById('yes-bar').style.width = pct + '%';
-    document.getElementById('bar-percent').textContent = pct + '%';
-    document.getElementById('bar-asks').textContent =
-      askCount === 1 ? '1ère demande' : `${askCount}ème demande`;
-  }
-
-  function updateAskUI(d) {
-    const sub = subTexts[Math.min(askCount - 1, subTexts.length - 1)];
-    document.getElementById('proposal-sub').textContent = sub;
-
-    if (askCount > 1) {
-      document.getElementById('ask-counter').textContent =
-        `💌 Demande n°${askCount} — le ${formatDate(d)}`;
-    }
-  }
-
-  function addDateToList(d) {
-    const hist = document.getElementById('dates-history');
-    if (askCount >= 2) hist.style.display = 'block';
-    const li = document.createElement('li');
-    li.innerHTML = `<span class="ask-num">#${askCount}</span><span>${formatShort(d)}</span>`;
-    document.getElementById('dates-list').prepend(li);
-  }
-
-  function growOuiButton() {
-    const btn = document.getElementById('btn-oui');
-    const scale = 1 + (askCount - 1) * 0.06;
-    btn.style.transform = `scale(${Math.min(scale, 1.5)})`;
-    btn.style.fontSize = `${1.2 + (askCount - 1) * 0.05}rem`;
-    btn.style.padding = `${16 + (askCount-1)*1.5}px ${40 + (askCount-1)*3}px`;
-  }
-
-  // ----- REFUSE -----
-  const refuseMessages = [
-    "Pas maintenant...",
-    "Peut-être plus tard ?",
-    "Je ne suis pas sûre...",
-    "Laisse-moi réfléchir...",
-    "C'est trop tôt ?",
-  ];
-  let refuseIdx = 0;
-
-  function refuseProposal() {
-    refuseIdx = Math.min(refuseIdx + 1, refuseMessages.length - 1);
-    const btn = document.getElementById('btn-non');
-    btn.textContent = refuseMessages[refuseIdx];
-    // Short delay then re-ask
-    setTimeout(() => {
-      recordAsk();
-    }, 1200);
-  }
-
-  // ----- ACCEPT -----
-  function acceptProposal() {
-    document.getElementById('proposal-panel').style.display = 'none';
-    const sp = document.getElementById('success-panel');
-    sp.style.display = 'block';
-    const d = new Date();
-    document.getElementById('success-date').textContent =
-      '💍 ' + formatDate(d);
-    launchHearts();
-  }
-
-  // ----- HEARTS -----
-  function launchHearts() {
-    const container = document.getElementById('hearts');
-    container.innerHTML = '';
-    const emojis = ['💕','💗','💖','💝','💓','♥','💞','💘'];
-    for (let i = 0; i < 40; i++) {
-      const h = document.createElement('div');
-      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      const size = 20 + Math.random() * 30;
-      h.style.cssText = `
-        position:absolute;
-        left:${Math.random()*100}%;
-        bottom:-60px;
-        font-size:${size}px;
-        animation: rise ${3+Math.random()*4}s ease-out forwards;
-        animation-delay:${Math.random()*3}s;
-        opacity:0;
-      `;
-      container.appendChild(h);
-    }
-    // Add rise keyframe dynamically
-    if (!document.getElementById('rise-style')) {
-      const s = document.createElement('style');
-      s.id = 'rise-style';
-      s.textContent = `
-        @keyframes rise {
-          0%   { transform: translateY(0) scale(0); opacity: 0; }
-          20%  { opacity: 1; }
-          100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
-        }
-      `;
-      document.head.appendChild(s);
-    }
-  }
+  var MONTHS=["janvier","fevrier","mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"];
+  var DAYS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  function fmtDate(d){return DAYS[d.getDay()]+" "+d.getDate()+" "+MONTHS[d.getMonth()]+" "+d.getFullYear();}
+  var now=new Date();
+  document.getElementById("today-date").textContent=fmtDate(now);
+  document.getElementById("success-date").textContent=fmtDate(now);
+  var COLORS=["#e8a0a0","#d4a847","#a0c4e8","#a0e8b0","#f5ccd4","#f0c040","#c4a0e8"];
+  var cb=document.getElementById("conf-bg");
+  for(var i=0;i<35;i++){var c=document.createElement("div");c.className="conf";var w=6+Math.random()*10;c.style.cssText="left:"+Math.random()*100+"%;width:"+w+"px;height:"+(w*1.4)+"px;background:"+COLORS[Math.floor(Math.random()*COLORS.length)]+";animation-duration:"+(5+Math.random()*9)+"s;animation-delay:"+(Math.random()*8)+"s;transform:rotate("+(Math.random()*360)+"deg)";cb.appendChild(c);}
+  var ST=["star-float"];
+  var SE=["⭐","✨","ἱF","ὊB","ἱ9"];
+  for(var j=0;j<14;j++){var s=document.createElement("div");s.className="star-float";s.textContent=["&#x2B50;","&#x2728;","&#x1F31F;","&#x1F4AB;","&#x1F319;"][Math.floor(Math.random()*5)];s.style.cssText="left:"+Math.random()*100+"%;top:"+(70+Math.random()*30)+"%;font-size:"+(0.8+Math.random()*1.2)+"rem;animation-duration:"+(8+Math.random()*14)+"s;animation-delay:"+(Math.random()*10)+"s";document.body.appendChild(s);}
+  function go(f,t){document.getElementById(f).style.display="none";document.getElementById(t).style.display="block";window.scrollTo({top:0,behavior:"smooth"});}
+  function selOpt(el){document.querySelectorAll(".opt").forEach(function(o){o.classList.remove("sel");});el.classList.add("sel");document.getElementById("confirm-btn").style.display="inline-block";}
+  function launchFireworks(){var FW=["&#x1F386;","&#x1F387;","&#x2728;","&#x1F389;","&#x1F973;","&#x1F38A;","&#x1F31F;","&#x1F4A5;","&#x1F381;","&#x1F49B;"];for(var i=0;i<60;i++){(function(){setTimeout(function(){var d=document.createElement("div");d.innerHTML=FW[Math.floor(Math.random()*FW.length)];d.style.cssText="position:fixed;left:"+Math.random()*100+"%;top:"+Math.random()*100+"%;font-size:"+(1.2+Math.random()*2)+"rem;pointer-events:none;z-index:999;animation:confFall "+(1.5+Math.random()*2)+"s ease-out forwards;opacity:1";document.body.appendChild(d);setTimeout(function(){d.remove();},3500);},Math.random()*2800);})();}}
 </script>
 </body>
 </html>
